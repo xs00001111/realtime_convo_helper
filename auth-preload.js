@@ -17,5 +17,15 @@ contextBridge.exposeInMainWorld('auth', {
   onAuthSuccess: (callback) => ipcRenderer.on('auth-success', (_, data) => {
     console.log('[AUTH-PRELOAD] Received auth-success event:', data);
     callback(data);
+  }),
+  // Session status listener
+  onSessionStatus: (callback) => ipcRenderer.on('session-status', (_, isValid) => {
+    console.log('[AUTH-PRELOAD] Received session-status event:', isValid);
+    callback(isValid);
+  }),
+  // Subscription error listener
+  onSubscriptionError: (callback) => ipcRenderer.on('subscription-error', (_, data) => {
+    console.log('[AUTH-PRELOAD] Received subscription-error event:', data);
+    callback(data);
   })
 });
